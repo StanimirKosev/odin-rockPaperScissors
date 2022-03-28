@@ -23,6 +23,7 @@ playerSelection = prompt("Choose - Rock, Paper or Scissors").toLowerCase();
 
 
 
+/** 1 round of rock paper scissors */
 function playRound(playerSelection,computerSelection){
     
     /**Wins */
@@ -48,10 +49,16 @@ function playRound(playerSelection,computerSelection){
     }    
     
     /**Draw */
-    else {
+    else if ( playerSelection == computerSelection){
         return "It's a draw!"
     }
+    
+    /**User input validation */
+    else{
+        return "Your input was invalid. Please type rock,paper or scissors"
+    }
 }
+
 
 
 
