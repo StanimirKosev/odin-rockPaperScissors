@@ -15,51 +15,111 @@ function computerPlay(){
     
     return computerSelection;
 }  
-computerPlay();
-
-
-/** Player 2 - Human */
-playerSelection = prompt("Choose - Rock, Paper or Scissors").toLowerCase();
 
 
 
-/** 1 round of rock paper scissors */
+/** One round of rock paper scissors */
 function playRound(playerSelection,computerSelection){
     
     /**Wins */
     if (playerSelection == "rock" && computerSelection == "scissors"){
-        return "You win! Rock beats scissors!"
+        result =("You win! Rock beats scissors!");
+        return result;
     }
     if (playerSelection == "paper" && computerSelection == "rock"){
-        return "You win! Paper beats rock!"
+        result =("You win! Paper beats rock!");
+        return result;
     }    
     if (playerSelection == "scissors" && computerSelection == "paper"){
-        return "You win! Scissors beats paper!"
+        result =("You win! Scissors beats paper!");
+        return result;
     }    
     
     /**Looses */
     if (playerSelection == "scissors" && computerSelection == "rock"){
-        return "You lost! Rock beats scissors!"
+        result =("You lost! Rock beats scissors!");
+        return result;
     }
     if (playerSelection == "rock" && computerSelection == "paper"){
-        return "You lost! Paper beats rock!"
+        result =("You lost! Paper beats rock!");
+        return result;
     }    
     if (playerSelection == "paper" && computerSelection == "scissors"){
-        return "You lost! Scissors beats paper!"
+        result =("You lost! Scissors beats paper!");
+        return result;
     }    
     
     /**Draw */
     else if ( playerSelection == computerSelection){
-        return "It's a draw!"
+        result =("It's a draw!");
+        return result;
     }
     
     /**User input validation */
     else{
-        return "Your input was invalid. Please type rock,paper or scissors"
+        result=("Your input was invalid. Please type rock,paper or scissors");
+        return result;
     }
 }
 
 
 
+/**Full game - Five round's of rock paper scissors */
+function game(){
+    
+    let humanResult = 0;
+    let computerResult = 0;
+    let drawResult = 0;
+    let invalidInputs =0;
+    let winner = "noOne";
+    
+    for (let i = 0; i < 5; i++) {
+        
+        /** Player 1 - Computer  */
+        computerPlay();
+        
+        /** Player 2 - Human  */
+        playerSelection = prompt("Choose - Rock, Paper or Scissors").toLowerCase();
+        
+        playRound(playerSelection,computerSelection);
+        
+        if (result.substring(0,8) == "You win!"){
+            ++humanResult;
+        }
+        if (result.substring(0,9) == "You lost!"){
+            ++computerResult;
+        }
+        if (result == "It's a draw!"){
+            ++drawResult;
+        }
+        if (result  == "Your input was invalid. Please type rock,paper or scissors"){
+            ++invalidInputs;
+            ++computerResult; /** Invalid inputs from the human result in points for the computer */
+        }
+        console.log(`The human chose ${playerSelection} and the computer chose ${computerSelection}`);
+    }
 
-console.log(playRound(playerSelection,computerSelection));
+    if (humanResult > computerResult){
+        winner = "Human WON!";
+    }
+    else if (humanResult < computerResult){
+        winner = "Computer WON!";
+    }
+    else{
+        winner = "It's a draw!"
+    }
+    
+    return `Result for the game is:
+            Points for the human: ${humanResult}  
+            Point for the computer: ${computerResult}\n 
+            Draws were: ${drawResult}
+            Invalid inputs from the human were: ${invalidInputs}\n
+            The final result of the match is........................  ${winner}`;
+    
+    
+}
+
+
+
+console.log(game());
+
