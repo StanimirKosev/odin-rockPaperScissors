@@ -15,50 +15,51 @@ function computerPlay(){
     
     return computerSelection;
 }  
-
+computerPlay();
 
 
 /** One round of rock paper scissors */
 function playRound(playerSelection,computerSelection){
-    playerSelection = prompt("Choose - Rock, Paper or Scissors").toLowerCase();
+  
     /**Wins */
     if (playerSelection == "rock" && computerSelection == "scissors"){
         result =("You win! Rock beats scissors!");
-        return result;
+        console.log(result);
+        
     }
     if (playerSelection == "paper" && computerSelection == "rock"){
         result =("You win! Paper beats rock!");
-        return result;
+        console.log(result);
     }    
     if (playerSelection == "scissors" && computerSelection == "paper"){
         result =("You win! Scissors beats paper!");
-        return result;
+        console.log(result);
     }    
     
     /**Looses */
     if (playerSelection == "scissors" && computerSelection == "rock"){
         result =("You lost! Rock beats scissors!");
-        return result;
+        console.log(result);
     }
     if (playerSelection == "rock" && computerSelection == "paper"){
         result =("You lost! Paper beats rock!");
-        return result;
+        console.log(result);
     }    
     if (playerSelection == "paper" && computerSelection == "scissors"){
         result =("You lost! Scissors beats paper!");
-        return result;
+        console.log(result);
     }    
     
     /**Draw */
     else if ( playerSelection == computerSelection){
         result =("It's a draw!");
-        return result;
+        console.log(result);
     }
     
     /**User input validation */
     else{
         result=("Your input was invalid. Please type rock,paper or scissors");
-        return result;
+        console.log(result);
     }
 }
 
@@ -73,13 +74,13 @@ function game(){
     let invalidInputs =0;
     let winner = "noOne";
     
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {  
         
         /** Player 1 - Computer  */
         computerPlay();
         
         /** Player 2 - Human  */
-        playerSelection = prompt("Choose - Rock, Paper or Scissors").toLowerCase();
+       /**   playerSelection = prompt("Choose - Rock, Paper or Scissors").toLowerCase();  */
         
         playRound(playerSelection,computerSelection);
         
@@ -121,18 +122,20 @@ function game(){
 
 /**----- DOM MANIPULATION AND EVENTS -----*/
 /** Parent Node */
-const parent = document.querySelector('.parentButton');
+const parent = document.querySelector('.parent');
 
 
 
 /** Child Node 1  */
 const rockButton = document.createElement('button'); 
+rockButton.classList.add('rockButton'); 
 rockButton.textContent = 'Rock';
 parent.appendChild(rockButton);
 
 
 /** Child Node 2   */
 const paperButton = document.createElement('button');
+paperButton.classList.add('paperButton'); 
 paperButton.textContent = 'Paper';
 parent.appendChild(paperButton);
 
@@ -140,18 +143,17 @@ parent.appendChild(paperButton);
 
 /** Child Node 3  */
 const scissorskButton = document.createElement('button');
+scissorskButton.classList.add('scissorsButton'); 
 scissorskButton.textContent = 'Scissors';
 parent.appendChild(scissorskButton);
 
 
+const rockListener = document.querySelector('.rockButton');
+rockListener.addEventListener('click',  function () {playRound("rock",computerSelection)});
 
-const childrenButtons = document.querySelectorAll('button');
-childrenButtons.forEach((button) => {
-button.addEventListener('click',() => {
-    alert(button.id);
-    });
-});
+const paperListener = document.querySelector('.paperButton');
+paperListener.addEventListener('click',  function () {playRound("paper",computerSelection)});
 
-
-
+const scissorsListener = document.querySelector('.scissorsButton');
+scissorsListener.addEventListener('click',  function () {playRound("scissors",computerSelection)});
 
