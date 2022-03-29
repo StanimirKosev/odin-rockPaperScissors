@@ -18,106 +18,64 @@ function computerPlay(){
 computerPlay();
 
 
-/** One round of rock paper scissors */
 function playRound(playerSelection,computerSelection){
-  
+    
+    let humanResult = 0;
+    let computerResult = 0;
+    let drawResult = 0;
+    let winner = "";
+    
+    let divResult = document.createElement('div');
+    parent.appendChild(divResult);
+   
+    
     /**Wins */
     if (playerSelection == "rock" && computerSelection == "scissors"){
         result =("You win! Rock beats scissors!");
-        console.log(result);
-        
+        divResult.textContent = result;
+        ++humanResult;
     }
     if (playerSelection == "paper" && computerSelection == "rock"){
         result =("You win! Paper beats rock!");
-        console.log(result);
+        divResult.textContent = result;
+        ++humanResult;
     }    
     if (playerSelection == "scissors" && computerSelection == "paper"){
         result =("You win! Scissors beats paper!");
-        console.log(result);
+        divResult.textContent = result;
+        ++humanResult;
     }    
     
     /**Looses */
     if (playerSelection == "scissors" && computerSelection == "rock"){
         result =("You lost! Rock beats scissors!");
-        console.log(result);
+        divResult.textContent = result;
+        ++computerResult;
     }
     if (playerSelection == "rock" && computerSelection == "paper"){
         result =("You lost! Paper beats rock!");
-        console.log(result);
+        divResult.textContent = result;
+        ++computerResult;
     }    
     if (playerSelection == "paper" && computerSelection == "scissors"){
         result =("You lost! Scissors beats paper!");
-        console.log(result);
+        divResult.textContent = result;
+        ++computerResult;
     }    
     
     /**Draw */
     else if ( playerSelection == computerSelection){
         result =("It's a draw!");
-        console.log(result);
+        divResult.textContent = result;
+        ++drawResult;
     }
-    
-    /**User input validation */
-    else{
-        result=("Your input was invalid. Please type rock,paper or scissors");
-        console.log(result);
-    }
+   
+    let divRunningScore = document.createElement('div');
+    parent.appendChild(divRunningScore);
+    divRunningScore.textContent = `Human points : ${humanResult} - ${computerResult} : Computer points `;
 }
+/** broene na running score i loop nqkakuv - razlichni rezultati vseki rund  */
 
-
-
-/**Full game - Five round's of rock paper scissors */
-function game(){
-    
-    let humanResult = 0;
-    let computerResult = 0;
-    let drawResult = 0;
-    let invalidInputs =0;
-    let winner = "noOne";
-    
-    for (let i = 0; i < 5; i++) {  
-        
-        /** Player 1 - Computer  */
-        computerPlay();
-        
-        /** Player 2 - Human  */
-       /**   playerSelection = prompt("Choose - Rock, Paper or Scissors").toLowerCase();  */
-        
-        playRound(playerSelection,computerSelection);
-        
-        if (result.substring(0,8) == "You win!"){
-            ++humanResult;
-        }
-        if (result.substring(0,9) == "You lost!"){
-            ++computerResult;
-        }
-        if (result == "It's a draw!"){
-            ++drawResult;
-        }
-        if (result  == "Your input was invalid. Please type rock,paper or scissors"){
-            ++invalidInputs;
-            ++computerResult; /** Invalid inputs from the human result in points for the computer */
-        }
-        console.log(`The human chose ${playerSelection} and the computer chose ${computerSelection}`);
-    }
-
-    if (humanResult > computerResult){
-        winner = "Human WON!";
-    }
-    else if (humanResult < computerResult){
-        winner = "Computer WON!";
-    }
-    else{
-        winner = "It's a draw!"
-    }
-    
-    return `Result for the game is:
-            Points for the human: ${humanResult}  
-            Point for the computer: ${computerResult}\n 
-            Draws were: ${drawResult}
-            Invalid inputs from the human were: ${invalidInputs}\n
-            The final result of the match is........................  ${winner}`;
-}
-    
 
 
 /**----- DOM MANIPULATION AND EVENTS -----*/
@@ -131,6 +89,7 @@ const rockButton = document.createElement('button');
 rockButton.classList.add('rockButton'); 
 rockButton.textContent = 'Rock';
 parent.appendChild(rockButton);
+
 
 
 /** Child Node 2   */
@@ -156,4 +115,10 @@ paperListener.addEventListener('click',  function () {playRound("paper",computer
 
 const scissorsListener = document.querySelector('.scissorsButton');
 scissorsListener.addEventListener('click',  function () {playRound("scissors",computerSelection)});
+
+
+const computerListener = document.querySelector('.rockButton , .paperButton , .scissorsButton');
+computerListener.addEventListener('click',  function () {computerPlay()});
+/** computerPlay clicking is not working with paper and scissors buttons*/
+
 
