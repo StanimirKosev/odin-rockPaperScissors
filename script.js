@@ -20,7 +20,7 @@ function computerPlay(){
 
 /** One round of rock paper scissors */
 function playRound(playerSelection,computerSelection){
-    
+    playerSelection = prompt("Choose - Rock, Paper or Scissors").toLowerCase();
     /**Wins */
     if (playerSelection == "rock" && computerSelection == "scissors"){
         result =("You win! Rock beats scissors!");
@@ -115,9 +115,42 @@ function game(){
             Draws were: ${drawResult}
             Invalid inputs from the human were: ${invalidInputs}\n
             The final result of the match is........................  ${winner}`;
-    
-    
 }
+    
+
+
+/**----- DOM MANIPULATION AND EVENTS -----*/
+/** Parent Node */
+const parent = document.querySelector('.parentButton');
+
+
+
+/** Child Node 1  */
+const rockButton = document.createElement('button'); 
+rockButton.textContent = 'Rock';
+parent.appendChild(rockButton);
+
+
+/** Child Node 2   */
+const paperButton = document.createElement('button');
+paperButton.textContent = 'Paper';
+parent.appendChild(paperButton);
+
+
+
+/** Child Node 3  */
+const scissorskButton = document.createElement('button');
+scissorskButton.textContent = 'Scissors';
+parent.appendChild(scissorskButton);
+
+
+
+const childrenButtons = document.querySelectorAll('button');
+childrenButtons.forEach((button) => {
+button.addEventListener('click',() => {
+    alert(button.id);
+    });
+});
 
 
 
