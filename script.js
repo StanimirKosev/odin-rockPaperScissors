@@ -18,12 +18,11 @@ function computerPlay(){
 computerPlay();
 
 
+let humanResult = 0;
+let computerResult = 0;
+
+
 function playRound(playerSelection,computerSelection){
-    
-    let humanResult = 0;
-    let computerResult = 0;
-    let drawResult = 0;
-    let winner = "";
     
     let divResult = document.createElement('div');
     parent.appendChild(divResult);
@@ -67,14 +66,28 @@ function playRound(playerSelection,computerSelection){
     else if ( playerSelection == computerSelection){
         result =("It's a draw!");
         divResult.textContent = result;
-        ++drawResult;
     }
-   
+    
     let divRunningScore = document.createElement('div');
     parent.appendChild(divRunningScore);
-    divRunningScore.textContent = `Human points : ${humanResult} - ${computerResult} : Computer points `;
+    divRunningScore.textContent = `Human  ${humanResult} vs. ${computerResult}  Computer`;
+
+    setTimeout(() => { winner() }, 4000);
 }
-/** broene na running score i loop nqkakuv - razlichni rezultati vseki rund  */
+
+
+function winner(){
+    if (humanResult == 5){
+        alert(`Human WON!\nHuman  ${humanResult} vs. ${computerResult}  Computer`);
+        humanResult= 0;
+        computerResult= 0;
+    }
+    else if (computerResult == 5){
+        alert(`Computer WON!\nHuman  ${humanResult} vs. ${computerResult}  Computer`);
+        humanResult= 0;
+        computerResult= 0;
+    }
+}
 
 
 
@@ -117,8 +130,7 @@ const scissorsListener = document.querySelector('.scissorsButton');
 scissorsListener.addEventListener('click',  function () {playRound("scissors",computerSelection)});
 
 
-const computerListener = document.querySelector('.rockButton , .paperButton , .scissorsButton');
-computerListener.addEventListener('click',  function () {computerPlay()});
-/** computerPlay clicking is not working with paper and scissors buttons*/
-
-
+const computerListener = document.querySelectorAll('button');
+computerListener.forEach(btn => {
+    btn.addEventListener('click', function (){computerPlay()});
+ });
