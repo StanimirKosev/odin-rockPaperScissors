@@ -24,65 +24,70 @@ let computerResult = 0;
 
 function playRound(playerSelection,computerSelection){
     
-    let divResult = document.createElement('div');
-    parent.appendChild(divResult);
-   
-    
     /**Wins */
     if (playerSelection == "rock" && computerSelection == "scissors"){
         result =("You win! Rock beats scissors!");
-        divResult.textContent = result;
         ++humanResult;
     }
     if (playerSelection == "paper" && computerSelection == "rock"){
         result =("You win! Paper beats rock!");
-        divResult.textContent = result;
         ++humanResult;
     }    
     if (playerSelection == "scissors" && computerSelection == "paper"){
         result =("You win! Scissors beats paper!");
-        divResult.textContent = result;
         ++humanResult;
     }    
     
     /**Looses */
     if (playerSelection == "scissors" && computerSelection == "rock"){
         result =("You lost! Rock beats scissors!");
-        divResult.textContent = result;
         ++computerResult;
     }
     if (playerSelection == "rock" && computerSelection == "paper"){
         result =("You lost! Paper beats rock!");
-        divResult.textContent = result;
         ++computerResult;
     }    
     if (playerSelection == "paper" && computerSelection == "scissors"){
         result =("You lost! Scissors beats paper!");
-        divResult.textContent = result;
         ++computerResult;
     }    
     
     /**Draw */
     else if ( playerSelection == computerSelection){
         result =("It's a draw!");
-        divResult.textContent = result;
     }
+    
+    txtResults(); 
+
+    setTimeout(() => { winner() }, 900);
+}
+
+
+
+function txtResults(){
+
+    let divResult = document.createElement('div');
+    parent.appendChild(divResult);
+    divResult.textContent = result;
     
     let divRunningScore = document.createElement('div');
     parent.appendChild(divRunningScore);
     divRunningScore.textContent = `Human  ${humanResult} vs. ${computerResult}  Computer`;
 
-    setTimeout(() => { winner() }, 4000);
+    let line = document.createElement('div');
+    parent.appendChild(line);
+    line.textContent = `------------------------------------`;
 }
 
 
+
 function winner(){
-    if (humanResult == 5){
+    if (humanResult >= 5){
         alert(`Human WON!\nHuman  ${humanResult} vs. ${computerResult}  Computer`);
         humanResult= 0;
         computerResult= 0;
     }
-    else if (computerResult == 5){
+    else if (computerResult >= 5){
         alert(`Computer WON!\nHuman  ${humanResult} vs. ${computerResult}  Computer`);
         humanResult= 0;
         computerResult= 0;
@@ -95,6 +100,10 @@ function winner(){
 /** Parent Node */
 const parent = document.querySelector('.parent');
 
+const title = document.createElement('p');
+title.classList.add('title'); 
+title.textContent = 'First player with 5 points WINS!';
+parent.appendChild(title);
 
 
 /** Child Node 1  */
@@ -134,3 +143,4 @@ const computerListener = document.querySelectorAll('button');
 computerListener.forEach(btn => {
     btn.addEventListener('click', function (){computerPlay()});
  });
+
